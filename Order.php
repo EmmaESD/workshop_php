@@ -33,7 +33,13 @@ class Order {
         $this->products = $products;
         $this->customerName = $customerName;
 
+        $this->totalPrice = count($products) * 5;
+
+        echo "Commande {$this->id} créée d'un montant de {$this->totalPrice} €";
+
     }
 }
+
+$order = new Order(customerName:'John Doe', products:['casque', 'téléphone']);
 
 
