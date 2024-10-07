@@ -4,9 +4,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 class VendorMachine {
-    private $isOn;
-    private $snacksQty;
-    private $money;
+    private bool $isOn;
+    private int $snacksQty;
+    private int $money;
 
     public function __construct(){
         $this->isOn = false;
@@ -17,9 +17,10 @@ class VendorMachine {
     public function buySnacks(): void{
         $this->isOn = true;
         if ($this->snacksQty < 1) {
-            throw new Error(message: 'machine vide !');
+            throw new Exception(message: 'machine vide !');
         }
-        $this->money = +2;
+        $this->snacksQty = $this->snacksQty - 1;
+        $this->money = $this->money + 2;
     }
 
     public function resetVendor(): void {
@@ -33,9 +34,11 @@ class VendorMachine {
         return $this->snacksQty + (50 - $this->snacksQty);
     }
 
-    public function shootWithFoot(): void {
+    public function shootWithFoot(): string {
         $this->isOn = false;
         $this->dropMoney();
+
+        return "snacks tombés : {$this->snacksQty} et monnaie : {$this->money}";
     }
 
     private function dropMoney(): void {
@@ -59,4 +62,4 @@ class VendorMachine {
 
 $vendorMachine = new VendorMachine();
 
-echo $vendorMachine.snacksQty();
+echo $vendorMachine->shootWithFoot();
