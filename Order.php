@@ -28,6 +28,7 @@ class Order {
     private string $customerName;
     private DateTime $createdAt;
     private string $status;
+    private array $listProducts;
 
     public function __construct(string $customerName, array $products) {
         if($customerName === 'jean dupont'){
@@ -37,11 +38,16 @@ class Order {
             throw new Exception(message: 'Panier complet');
         }
         
+        
         $this->status = 'CART';
         $this->createdAt = new DateTime();
         $this->id = rand();
 
         $this->products = $products;
+        $this->listProducts= ['casque', 'telephone', 'stylo', 'feuille', 'sac'];
+        if($products /= $this->listProducts){
+            unset($products[array_search]);
+        }
 
         $this->customerName = $customerName;
         
@@ -52,6 +58,8 @@ class Order {
 
         echo "Commande {$this->id} créée d'un montant de {$this->totalPrice} €";
     }
+
+    public function removeProduct(string)
 }
 
 
