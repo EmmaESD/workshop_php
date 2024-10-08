@@ -1,9 +1,12 @@
 <?php
-
+//Normalement, si un code est bien lisible, il n'y a pas besoin
+//de commentaires pour expliquer. Il faut se poser la question
+//Si un commentaire est vraiment necessaire.
 class Order {
 
-	//Magic string permettant de rendre le code plus compréhensible.
+	//static permettant de rendre le code plus compréhensible.
 	//au lieu de mettre des variables ou nombre dans le code, permet de savoir à quoi ils correspondent
+	//possibilité de les utiliser en dehors de la classe.
 	public static $CART_STATUS = "CART";
 	public static $SHIPPING_ADDRESS_SET_STATUS = "SHIPPING_ADDRESS_SET";
 	public static $SHIPPING_METHOD_SET_STATUS = "SHIPPING_METHOD_SET";
@@ -52,25 +55,28 @@ class Order {
 		$this->id = rand();
 		$this->products = $products;
 		$this->customerName = $customerName;
-		$this->totalPrice = count($products) * Order::$UNIQUE_PRODUCT_PRICE;
+		$this->totalPrice = count($products) * ;
 
 		echo "Commande {$this->id} créée, d'un montant de {$this->totalPrice} !</br></br>";
 	}
 
 //Methodes
-	public function removeProduct(string $product) {
-
+	private function removeProductFromList(string $product) {
 		if (($key = array_search($product, $this->products)) !== false) {
 			unset($this->products[$key]);
 		}
+	}
 
-		$this->totalPrice = count($this->products) * Order::$UNIQUE_PRODUCT_PRICE;
+	private function calculateTotalCart(): float {
+		return count($this->products) * Order::$UNIQUE_PRODUCT_PRICE
+	}
 
+	public function removeProduct(string $product) {
+		$this->removeProductFromList($product);
+		$this->totalPrice = $this->calculateTotalCart();
 
 		$productsAsString = implode(',', $this->products);
-
 		echo "Liste des produits : {$productsAsString}</br></br>";
-
 	}
 
 	public function addProduct(string $product): void {
