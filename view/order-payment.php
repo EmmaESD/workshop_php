@@ -11,9 +11,21 @@
 	
 	<main>
 
-        <form >
-            <p>adresse Créée. Choisissez votre mode de paiement.</p>
-
+	<?php if (!empty($_POST['shippingAddress']) && !empty($_POST['shippingCity']) && !empty($_POST['shippingCountry'])) {
+            $shippingAddress = $_POST['shippingAddress'];
+            $shippingCity = $_POST['shippingCity'];
+            $shippingCountry = $_POST['shippingCountry'];
+        ?>
+            <p>Votre colis sera livré à l'adresse suivante : <?php echo "$shippingAddress, $shippingCity, $shippingCountry"; ?>.</p>
+			
+        <?php
+        } else {
+            echo "<p>Veuillez saisir votre adresse de livraison.</p>";
+        }
+        ?>
+		<br>
+		<p>Veuillez choisir un moyen de paiement</p>
+		<form >
             
         </form>
 	</main>

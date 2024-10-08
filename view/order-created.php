@@ -12,12 +12,10 @@
 	<main>
 		<p>La commande a été créée avec succès. Ajoutez votre adresse de livraison.</p>
 
-        <form method="POST" action="../controller/set-shipping-address.php">
-            <input type="text" name="shippingAddress" id="shippingAddress" placeholder="Adresse">
-            <input type="text" name="shippingCountry" id="shippingCountry" placeholder="pays">
-            <input type="text" name="shippingCity" id="shippingCity" placeholder="ville">
-            <button type="submit">Envoyer</button>
-        </form>
+        <form action="../view/order-delivery.php" method="GET">
+    		<button type="submit">Aller à la page</button>
+		</form>
+
 	</main>
 
 	</body>
