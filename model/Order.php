@@ -138,14 +138,3 @@ class Order {
 		$this->status = Order::$PAID_STATUS;
 	}
 }
-
-//methode du try catch permettant d'afficher les erreurs sans faire de fatal error.
-//Elle récupère l'erreur et l'affiche normalement.
-try {
-	//Instanciation
-	$order = new Order('Nagui', ['g', 'stylo', 'trousse', 'ak-47']);
-} catch(Exception $error) {
-	echo $error->getMessage();
-}
-
-$order->removeProduct('g');
