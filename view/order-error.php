@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Commande créée</title>
+		<title>Erreur</title>
 	</head>
 	<body>
 
@@ -10,7 +10,7 @@
 	</header>
 	
 	<main>
-		<p>Erreur</p>
+    <p>Il y a eu une erreur : <?php echo $e->getMessage(); ?></p>
 	</main>
 
 	</body>
