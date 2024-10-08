@@ -1,12 +1,7 @@
 <?php
-//Normalement, si un code est bien lisible, il n'y a pas besoin
-//de commentaires pour expliquer. Il faut se poser la question
-//Si un commentaire est vraiment necessaire.
+
 class Order {
 
-	//static permettant de rendre le code plus compréhensible.
-	//au lieu de mettre des variables ou nombre dans le code, permet de savoir à quoi ils correspondent
-	//possibilité de les utiliser en dehors de la classe.
 	public static $CART_STATUS = "CART";
 	public static $SHIPPING_ADDRESS_SET_STATUS = "SHIPPING_ADDRESS_SET";
 	public static $SHIPPING_METHOD_SET_STATUS = "SHIPPING_METHOD_SET";
@@ -19,7 +14,6 @@ class Order {
 	public static $PAID_SHIPPING_METHOD = 'Chronopost Express';
 	public static $PAID_SHIPPING_METHODS_COST = 5;
 
-	//Encapsulation (Private/Public)
 	private array $products;
 
 	private string $customerName;
@@ -39,7 +33,6 @@ class Order {
 
 	private ?string $shippingCountry;
 
-	//Constructeur
 	public function __construct(string $customerName, array $products) {
 
 		if (count($products) > Order::$MAX_PRODUCTS_BY_ORDER) {
@@ -55,21 +48,15 @@ class Order {
 		$this->id = rand();
 		$this->products = $products;
 		$this->customerName = $customerName;
-		$this->totalPrice = count($products) * ;
-
-		echo "Commande {$this->id} créée, d'un montant de {$this->totalPrice} !</br></br>";
+		$this->totalPrice = count($products) * Order::$UNIQUE_PRODUCT_PRICE;
 	}
 
-//Methodes
-	private function removeProductFromList(string $product) {
-		if (($key = array_search($product, $this->products)) !== false) {
-			unset($this->products[$key]);
-		}
+
+
+	private function calculateTotalCart():  float {
+		return count($this->products) * Order::$UNIQUE_PRODUCT_PRICE;
 	}
 
-	private function calculateTotalCart(): float {
-		return count($this->products) * Order::$UNIQUE_PRODUCT_PRICE
-	}
 
 	public function removeProduct(string $product) {
 		$this->removeProductFromList($product);
@@ -79,9 +66,16 @@ class Order {
 		echo "Liste des produits : {$productsAsString}</br></br>";
 	}
 
+	private function removeProductFromList(string $product) {
+		if (($key = array_search($product, $this->products)) !== false) {
+			unset($this->products[$key]);
+		}
+	}
+
+
 	public function addProduct(string $product): void {
 
-		if (in_array($product, $this->products)) {
+		if ($this->isProductInCart($product)) {
 			throw new Exception('Le produit existe déjà dans le panier');
 		}
 
@@ -94,7 +88,11 @@ class Order {
 		}
 
 		$this->products[] = $product;
-		$this->totalPrice = count($this->products) * Order::$UNIQUE_PRODUCT_PRICE;
+		$this->totalPrice = $this->calculateTotalCart();
+	}
+
+	private function isProductInCart(string $product): bool {
+		return in_array($product, $this->products);
 	}
 
 	public function setShippingAddress(string $shippingCity, string $shippingAddress, string $shippingCountry): void {
@@ -126,7 +124,6 @@ class Order {
 		}
 		$this->shippingMethod = $shippingMethod;
 		$this->status = Order::$SHIPPING_METHOD_SET_STATUS;
-
 	}
 
 
