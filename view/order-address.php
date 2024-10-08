@@ -10,6 +10,7 @@
 	</header>
 	
 	<main>
+		<?php var_dump($_POST) ?>
 		<p>Ajoutez votre adresse de livraison.</p>
 
         <form method="POST" action="../controller/set-shipping-address.php">

@@ -11,7 +11,13 @@ if (isset($_SESSION['order'])) {
     $order = $_SESSION['order'];
     
 	$order->setShippingAddress($shippingAddress, $shippingCity, $shippingCountry);
-	require_once '../view/order-payment.php';
+
+    $_SESSION['shippingAddress'] = $shippingAddress;
+    $_SESSION['shippingCity'] = $shippingCity;
+    $_SESSION['shippingCountry'] = $shippingCountry;
+
+	header("Location: ../view/order-delivery-method.php");
+    exit();
 } else {
     echo "Aucune commande en cours.";
 }
