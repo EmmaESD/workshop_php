@@ -4,7 +4,6 @@ class Order {
 
 	//Magic string permettant de rendre le code plus compréhensible.
 	//au lieu de mettre des variables ou nombre dans le code, permet de savoir à quoi ils correspondent
-
 	public static $CART_STATUS = "CART";
 	public static $SHIPPING_ADDRESS_SET_STATUS = "SHIPPING_ADDRESS_SET";
 	public static $SHIPPING_METHOD_SET_STATUS = "SHIPPING_METHOD_SET";
@@ -15,9 +14,9 @@ class Order {
 	public static $AUTORIZED_SHIPPING_COUNTRIES = ['France', 'Belgique', 'Luxembourg'];
 	public static $AVAILABLE_SHIPPING_METHODS = ['Chronopost Express', 'Point relais', 'Domicile'];
 	public static $PAID_SHIPPING_METHOD = 'Chronopost Express';
-
 	public static $PAID_SHIPPING_METHODS_COST = 5;
 
+	//Encapsulation (Private/Public)
 	private array $products;
 
 	private string $customerName;
@@ -37,6 +36,7 @@ class Order {
 
 	private ?string $shippingCountry;
 
+	//Constructeur
 	public function __construct(string $customerName, array $products) {
 
 		if (count($products) > Order::$MAX_PRODUCTS_BY_ORDER) {
@@ -57,7 +57,7 @@ class Order {
 		echo "Commande {$this->id} créée, d'un montant de {$this->totalPrice} !</br></br>";
 	}
 
-
+//Methodes
 	public function removeProduct(string $product) {
 
 		if (($key = array_search($product, $this->products)) !== false) {
@@ -133,11 +133,13 @@ class Order {
 	}
 }
 
+//methode du try catch permettant d'afficher les erreurs sans faire de fatal error.
+//Elle récupère l'erreur et l'affiche normalement.
 try {
+	//Instanciation
 	$order = new Order('Nagui', ['g', 'stylo', 'trousse', 'ak-47']);
 } catch(Exception $error) {
 	echo $error->getMessage();
 }
-
 
 $order->removeProduct('g');
