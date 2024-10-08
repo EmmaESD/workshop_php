@@ -9,6 +9,8 @@ if (isset($_SESSION['order'])) {
     $order = $_SESSION['order'];
     
 	$order->setShippingMethod($shippingMethod);
+
+    $_SESSION['shippingMethods'] = $shippingMethod;
 	require_once '../view/order-finish.php';
 } else {
     echo "Aucune commande en cours.";

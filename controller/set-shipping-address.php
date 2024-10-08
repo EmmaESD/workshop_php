@@ -16,7 +16,7 @@ if (isset($_SESSION['order'])) {
     $_SESSION['shippingCity'] = $shippingCity;
     $_SESSION['shippingCountry'] = $shippingCountry;
 
-	header("Location: ../view/order-delivery-method.php");
+	header("Location: ../view/order-shipping-method.php");
     exit();
 } else {
     echo "Aucune commande en cours.";
