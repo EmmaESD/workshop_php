@@ -18,7 +18,7 @@
 		
 		<p>Veuillez choisir un moyen de paiement</p>
 		<form method="POST" action="../controller/set-shipping-method.php">
-			<select id="shippingMethod" name="shippingMethods[]" multiple>
+			<select id="shippingMethod" name="shippingMethods" multiple>
 				<option value="Chronopost Express">Chronopost Express</option>
 				<option value="Point relais">Point Relais</option>
 				<option value="Domicile">Domicile</option>

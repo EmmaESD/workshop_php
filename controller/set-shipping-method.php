@@ -13,7 +13,8 @@ if (isset($_SESSION['order'])) {
 	    $order->setShippingMethod($shippingMethod);
 
         $_SESSION['order'] = $order;
-	    require_once '../view/order-finish.php';
+
+	    require_once '../view/order-payment.php';
     } catch (Exception $e) {
         require_once "../view/order-error.php";
 

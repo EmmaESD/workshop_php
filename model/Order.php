@@ -21,6 +21,7 @@ class Order {
 	private float $totalPrice;
 
 	private int $id;
+
 	private DateTime $createdAt;
 
 	private string $status;
@@ -136,11 +137,13 @@ class Order {
 		$this->status = Order::$SHIPPING_METHOD_SET_STATUS;
 	}
 
-	public function pay(): void {
+	public function pay(int $cardDate, int $cardNumber, string $cardName): void {
 		if ($this->status !== Order::$SHIPPING_METHOD_SET_STATUS) {
-			throw new Exception(message: 'Vous ne pouvez pas payer avant d\'avoir renseigné la méthode de livraison');
+			throw new Exception('Vous ne pouvez pas payer avant d\'avoir renseigné la méthode de livraison');
 		}
 
 		$this->status = Order::$PAID_STATUS;
 	}
+	
+
 }

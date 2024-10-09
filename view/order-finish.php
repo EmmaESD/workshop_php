@@ -10,17 +10,9 @@
 	</header>
 	
 	<main>
+<?php var_dump($_SESSION)  ?>
 
-	
-        <p>Votre commande est validée.</p>
-        <p>Recapitulatif de votre commande :</p>
-        <p>Nom : <?php echo "$customerName"?></p>
-        <p>Article: <?php echo "$products"?></p>
-        <p>Adresse: <?php echo "$shippingAddress, $shippingCity, $shippingCountry"; ?></p>
-        <p>Mode de livraison: <?php echo "$shippingMethod"?></p>
-        <br>
-		<p>Prix de votre commande : <?php echo "$totalPrice" ?></p>
-        <p>Merci pour votre commande.</p>
+		<p>Vorte commande a bien été réglée</p>
 
 	</main>
 

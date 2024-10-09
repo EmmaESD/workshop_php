@@ -15,13 +15,15 @@ if (isset($_SESSION['order'])) {
         
         $order->setShippingAddress($shippingAddress, $shippingCity, $shippingCountry);
         
-        $_SESSION['order'] = $order;
+        $_SESSION['order'] = $order; 
+
         require_once '../view/order-shipping-method.php';
+        
     } catch (Exception $e) {
         require_once "../view/order-error.php";
 
     }
-    
+
 } else {
     echo "Aucune commande en cours.";
 }
