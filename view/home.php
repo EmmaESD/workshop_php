@@ -1,21 +1,10 @@
-<!DOCTYPE html>
+<?php require_once('./view/partials/header.php'); ?>
+<main>
 
-<html>
-	<head>
-		<title>Le eshop au top</title>
-	</head>
-	<body>
-
-	<header>
-		<h1>Le Eshop au top</h1>
-	</header>
-	
-	<main>
-	
 		<form method="POST" action="../controller/create-order.php">
 
 			<label for="customerName">Nom du client</label>
-			<input type="text" id="customerName" name="customerName" required minlength="2" maxlength="100" pattern="^(?!\s*$).{2,100}$">
+			<input type="text" id="customerName" name="customerName" required>
 			<br>
 
 			<label for="product">Produit</label>
@@ -36,5 +25,4 @@
 
 	</main>
 
-	</body>
-</html>
+<?php require_once('./view/partials/footer.php'); ?>
