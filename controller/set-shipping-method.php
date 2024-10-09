@@ -5,13 +5,20 @@ require_once '../model/Order.php';
 session_start();
 
 if (isset($_SESSION['order'])) {
-    $shippingMethod = $_POST['shippingMethod'];
-    $order = $_SESSION['order'];
-    
-	$order->setShippingMethod($shippingMethod);
+    try{
+        $order = $_SESSION['order'];
 
-    $_SESSION['shippingMethods'] = $shippingMethod;
-	require_once '../view/order-finish.php';
+        $shippingMethod = $_POST['shippingMethods'];
+    
+	    $order->setShippingMethod($shippingMethod);
+
+        $_SESSION['order'] = $order;
+	    require_once '../view/order-finish.php';
+    } catch (Exception $e) {
+        require_once "../view/order-error.php";
+
+    }
+    
 } else {
     echo "Aucune commande en cours.";
 }

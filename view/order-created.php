@@ -12,17 +12,16 @@
 	<main>
 		<?php 
 		var_dump($_SESSION);
-		session_start();
-
-	if (isset($_SESSION['customerName']) && isset($_SESSION['products'])) {
-    $customerName = $_SESSION['customerName'];
-    $products = $_SESSION['products'];
-	}
 		?>
 		<p>La commande a été créée avec succès. Ajoutez votre adresse de livraison.</p>
 
-        <form action="../view/order-address.php" method="GET">
-    		<button type="submit">Aller à la page</button>
+		<p>Ajoutez votre adresse de livraison.</p>
+
+		<form method="POST" action="../controller/set-shipping-address.php">
+			<input type="text" name="shippingAddress" id="shippingAddress" placeholder="Adresse" required minlength="2" maxlength="100" pattern="^(?!\s*$).{2,100}$">
+			<input type="text" name="shippingCountry" id="shippingCountry" placeholder="pays" required minlength="2" maxlength="100" pattern="^(?!\s*$).{2,100}$">
+			<input type="text" name="shippingCity" id="shippingCity" placeholder="ville" required minlength="2" maxlength="100" pattern="^(?!\s*$).{2,100}$">
+			<button type="submit">Envoyer</button>
 		</form>
 
 	</main>

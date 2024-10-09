@@ -5,19 +5,22 @@ require_once '../model/Order.php';
 session_start();
 
 if (isset($_SESSION['order'])) {
-    $shippingAddress = $_POST['shippingAddress'];
-    $shippingCity = $_POST['shippingCity'];
-    $shippingCountry = $_POST['shippingCountry'];
-    $order = $_SESSION['order'];
-    
-	$order->setShippingAddress($shippingAddress, $shippingCity, $shippingCountry);
+    try{
+        $order = $_SESSION['order'];
 
-    $_SESSION['shippingAddress'] = $shippingAddress;
-    $_SESSION['shippingCity'] = $shippingCity;
-    $_SESSION['shippingCountry'] = $shippingCountry;
+        $shippingAddress = $_POST['shippingAddress'];
+        $shippingCity = $_POST['shippingCity'];
+        $shippingCountry = $_POST['shippingCountry'];
+        
+        
+        $order->setShippingAddress($shippingAddress, $shippingCity, $shippingCountry);
+        
+        $_SESSION['order'] = $order;
+        require_once '../view/order-shipping-method.php';
+    } catch (Exception $e) {
+        require_once "../view/order-error.php";
 
-	header("Location: ../view/order-shipping-method.php");
-    exit();
+    }
 } else {
     echo "Aucune commande en cours.";
 }

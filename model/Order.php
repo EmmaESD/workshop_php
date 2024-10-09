@@ -42,6 +42,9 @@ class Order {
 		if (in_array($customerName, Order::$BLACKLISTED_CUSTOMERS)) {
 			throw new Exception("Vous êtes blacklisté");
 		}
+		if (!$this->isValidInput($customerName)) {
+            throw new Exception('Les champs doivent contenir entre 2 et 100 caractères et ne pas être uniquement des espaces.');
+        }
 
 		$this->status = Order::$CART_STATUS;
 		$this->createdAt = new DateTime();
@@ -96,6 +99,9 @@ class Order {
 	}
 
 	public function setShippingAddress(string $shippingCity, string $shippingAddress, string $shippingCountry): void {
+		if (!$this->isValidInput($shippingAddress) || !$this->isValidInput($shippingCity) || !$this->isValidInput($shippingCountry)) {
+            throw new Exception('Les champs doivent contenir entre 2 et 100 caractères et ne pas être uniquement des espaces.');
+        }
 		if ($this->status !== Order::$CART_STATUS) {
 			throw new Exception(message: 'Vous ne pouvez plus modifier l\'adresse de livraison');
 		}
@@ -109,6 +115,10 @@ class Order {
 		$this->shippingCountry = $shippingCountry;
 		$this->status = Order::$SHIPPING_ADDRESS_SET_STATUS;
 	}
+
+	private function isValidInput($input) {
+        return preg_match('/^(?!\s*$).{2,100}$/', $input);  // Doit avoir entre 2 et 100 caractères et ne pas être composé uniquement d'espaces
+    }
 
 	public function setShippingMethod(string $shippingMethod): void {
 		if ($this->status !== Order::$SHIPPING_ADDRESS_SET_STATUS) {
