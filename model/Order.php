@@ -136,7 +136,6 @@ class Order {
 		$this->status = Order::$SHIPPING_METHOD_SET_STATUS;
 	}
 
-
 	public function pay(): void {
 		if ($this->status !== Order::$SHIPPING_METHOD_SET_STATUS) {
 			throw new Exception(message: 'Vous ne pouvez pas payer avant d\'avoir renseigné la méthode de livraison');

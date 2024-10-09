@@ -16,6 +16,5 @@ try {
 	require_once '../view/order-created.php';
 
 } catch (Exception $e) {
-
 	require_once '../view/order-error.php';
 }

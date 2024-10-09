@@ -5,7 +5,7 @@ require_once '../model/Order.php';
 session_start();
 
 if (isset($_SESSION['order'])) {
-    try{
+    try {
         $order = $_SESSION['order'];
 
         $shippingMethod = $_POST['shippingMethods'];

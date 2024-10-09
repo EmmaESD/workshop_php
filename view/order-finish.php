@@ -19,6 +19,7 @@
         <p>Adresse: <?php echo "$shippingAddress, $shippingCity, $shippingCountry"; ?></p>
         <p>Mode de livraison: <?php echo "$shippingMethod"?></p>
         <br>
+		<p>Prix de votre commande : <?php echo "$totalPrice" ?></p>
         <p>Merci pour votre commande.</p>
 
 	</main>

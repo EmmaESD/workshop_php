@@ -21,6 +21,7 @@ if (isset($_SESSION['order'])) {
         require_once "../view/order-error.php";
 
     }
+    
 } else {
     echo "Aucune commande en cours.";
 }
